@@ -1,0 +1,11 @@
+{
+	"ImportPath": "github.com/extrame/http-redirect-proxy",
+	"GoVersion": "go1.6",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/valyala/fasthttp",
+			"Rev": "f8c0d95e57fe628cb7c005ec3afbccd4cc607db3"
+		}
+	]
+}

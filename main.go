@@ -1,12 +1,11 @@
 package main
 
 import (
-	"config"
-	"flag"
 	"fmt"
 	"os"
 
-	"github.com/bbangert/toml"
+	"github.com/extrame/http-redirect-proxy/config"
+
 	"github.com/valyala/fasthttp"
 	// "github.com/go-xorm/core"
 	// _ "github.com/go-sql-driver/mysql"
@@ -23,18 +22,12 @@ func fastHTTPHandler(ctx *fasthttp.RequestCtx) {
 }
 
 func main() {
-	//////////读取配置文件////////////////
-	flag_conf := flag.String("config", "proxy.conf", "配置文件地址")
-	flag.Parse()
+	port := os.Getenv("PORT")
 
-	conf := new(config.Config)
-
-	if _, err := toml.DecodeFile(*flag_conf, conf); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	if port == "" {
+		port = "80"
 	}
-
-	fasthttp.ListenAndServe(fmt.Sprintf(":%d", conf.Basic.Port), fastHTTPHandler)
+	fasthttp.ListenAndServe(fmt.Sprintf(":%s", port), fastHTTPHandler)
 }
 
 // pass plain function to fasthttp
